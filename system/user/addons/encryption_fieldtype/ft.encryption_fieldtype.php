@@ -65,7 +65,17 @@ class Encryption_fieldtype_ft extends EE_Fieldtype implements ColumnInterface
         return array_merge($this->settings, $_POST);
     }
 
-    public function display_settings($data)
+    public function save($data)
+    {
+        echo $data;
+        exit;
+    }
+
+    /**
+     * @param $data
+     * @return array[]
+     */
+    public function display_settings($data): array
     {
         $selected = element('display_field_type', $data);
         $field_max_length = !empty($data['field_max_length']) ? $data['field_max_length'] : 128 ;
@@ -127,6 +137,9 @@ class Encryption_fieldtype_ft extends EE_Fieldtype implements ColumnInterface
         ];
     }
 
+    /**
+     * @return array
+     */
     protected function roleOptions(): array
     {
         $groups = [];
@@ -143,6 +156,10 @@ class Encryption_fieldtype_ft extends EE_Fieldtype implements ColumnInterface
         return $groups;
     }
 
+    /**
+     * @param $data
+     * @return array
+     */
     public function save_settings($data)
     {
         return array(
@@ -153,6 +170,10 @@ class Encryption_fieldtype_ft extends EE_Fieldtype implements ColumnInterface
         );
     }
 
+    /**
+     * @param $data
+     * @return string
+     */
     public function display_field($data)
     {
         return form_input(array(
@@ -162,6 +183,12 @@ class Encryption_fieldtype_ft extends EE_Fieldtype implements ColumnInterface
         ));
     }
 
+    /**
+     * @param $data
+     * @param array $params
+     * @param false $tagdata
+     * @return string
+     */
     public function replace_tag($data, $params = array(), $tagdata = false)
     {
         return 'Magic!';
