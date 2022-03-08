@@ -74,4 +74,23 @@ class Field
 
         return ee('Encrypt')->encode($data);
     }
+
+    /**
+     * @return array
+     */
+    public function roleOptions(): array
+    {
+        $groups = [];
+        $query = ee('Model')
+            ->get('Role')
+            ->filter('role_id', '>=', '5')
+            ->order('name', 'asc')
+            ->all();
+
+        foreach ($query as $row) {
+            $groups[$row->role_id] = $row->name;
+        }
+
+        return $groups;
+    }
 }
