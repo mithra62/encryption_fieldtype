@@ -3,6 +3,12 @@ namespace Mithra62\EncryptionFieldtype\Services;
 
 class Field
 {
+    /**
+     * @param $data
+     * @param $settings
+     * @param $ft_name
+     * @return string
+     */
     public function display($data, $settings, $ft_name)
     {
         $field = '';
@@ -23,14 +29,13 @@ class Field
                 is_array($field_settings['decrypt_access']) &&
                 in_array(ee()->session->userdata('role_id'), $field_settings['decrypt_access']))) {
 
-            $options['value'] = ee('Encrypt')->decrypt(htmlspecialchars_decode($data));
+            $options['value'] = ee('Encrypt')->decode(($data));
 
         } else {
 
             if($data != '') {
                 $options['value'] = $field_settings['hidden_text'];
             }
-
         }
 
         switch($field_settings['display_field_type']) {
@@ -48,5 +53,25 @@ class Field
         }
 
         return $field;
+    }
+
+    /**
+     * @param $data
+     * @param $settings
+     * @param $field_name
+     * @return mixed
+     */
+    public function save($data, $settings, $field_name)
+    {
+        if($settings['hidden_text'] != $data) {
+            return ee('Encrypt')->encode($data);
+        }
+
+        $default = ee()->input->post('_encrypt_orig_'.$field_name);
+        if(($settings['hidden_text'] == $data) && $default) {
+            return $default;
+        }
+
+        return ee('Encrypt')->encode($data);
     }
 }
