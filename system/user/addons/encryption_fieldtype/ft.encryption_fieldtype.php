@@ -26,6 +26,12 @@ class Encryption_fieldtype_ft extends EE_Fieldtype implements ColumnInterface
         'textarea' => 'Textarea'
     );
 
+    public function __construct()
+    {
+        ee()->lang->loadfile('encryption_fieldtype');
+        parent::__construct();
+    }
+
     /**
      * @return string[]
      */
