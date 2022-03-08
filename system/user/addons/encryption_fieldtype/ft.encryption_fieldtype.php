@@ -67,12 +67,14 @@ class Encryption_fieldtype_ft extends EE_Fieldtype implements ColumnInterface
 
     public function display_settings($data)
     {
-        $selected = !empty($data['display_field_type']) ?? $data['display_field_type'];
+        $selected = element('display_field_type', $data);
         $field_max_length = !empty($data['field_max_length']) ? $data['field_max_length'] : 128 ;
         $hidden_text = !empty($data['hidden_text']) ? $data['hidden_text'] : '******';
+        $selected_group = (isset($data['decrypt_access']) && $data['decrypt_access'] != '') ? $data['decrypt_access'] : [];
         $settings = [
             [
                 'title' => 'display_type',
+                'desc' => 'display_type_instructions',
                 'fields' => [
                     'display_field_type' => [
                         'name' => 'display_field_type',
@@ -94,16 +96,19 @@ class Encryption_fieldtype_ft extends EE_Fieldtype implements ColumnInterface
             ],
             [
                 'title' => 'decrypt_access',
+                'desc' => 'decrypt_access_instructions',
                 'fields' => [
                     'decrypt_access' => [
                         'name' => 'decrypt_access',
                         'type' => 'checkbox',
-                        'choices' => []
+                        'value' => $selected_group,
+                        'choices' => $this->roleOptions()
                     ],
                 ],
             ],
             [
                 'title' => 'hidden_text',
+                'desc' => 'hidden_text_instructions',
                 'fields' => [
                     'hidden_text' => [
                         'name' => 'hidden_text',
@@ -122,9 +127,30 @@ class Encryption_fieldtype_ft extends EE_Fieldtype implements ColumnInterface
         ];
     }
 
+    protected function roleOptions(): array
+    {
+        $groups = [];
+        $query = ee('Model')
+            ->get('Role')
+            ->filter('role_id', '>=', '5')
+            ->order('name', 'asc')
+            ->all();
+
+        foreach ($query as $row) {
+            $groups[$row->role_id] = $row->name;
+        }
+
+        return $groups;
+    }
+
     public function save_settings($data)
     {
-        return [];
+        return array(
+            'decrypt_access'		=> element('decrypt_access', $data),
+            'field_max_length'		=> element('field_max_length', $data),
+            'display_field_type'	=> element('display_field_type', $data),
+            'hidden_text'			=> element('hidden_text', $data)
+        );
     }
 
     public function display_field($data)
@@ -139,5 +165,27 @@ class Encryption_fieldtype_ft extends EE_Fieldtype implements ColumnInterface
     public function replace_tag($data, $params = array(), $tagdata = false)
     {
         return 'Magic!';
+    }
+
+    /**
+     * Accept all content types.
+     *
+     * @param string  The name of the content type
+     * @return bool   Accepts all content types
+     */
+    public function accepts_content_type($name)
+    {
+        return true;
+    }
+
+    /**
+     * Update the fieldtype
+     *
+     * @param string $version The version being updated to
+     * @return boolean TRUE if successful, FALSE otherwise
+     */
+    public function update($version)
+    {
+        return true;
     }
 }
