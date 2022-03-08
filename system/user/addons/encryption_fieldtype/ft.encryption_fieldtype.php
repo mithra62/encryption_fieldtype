@@ -176,11 +176,7 @@ class Encryption_fieldtype_ft extends EE_Fieldtype implements ColumnInterface
      */
     public function display_field($data)
     {
-        return form_input(array(
-            'name'  => $this->field_name,
-            'id'    => $this->field_id,
-            'value' => $data
-        ));
+        return ee('encryption_fieldtype:Field')->display($data, $this->settings, $this->field_name);
     }
 
     /**
