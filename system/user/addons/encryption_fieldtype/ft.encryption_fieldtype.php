@@ -9,6 +9,11 @@ use ExpressionEngine\Library\CP\EntryManager\ColumnInterface;
 class Encryption_fieldtype_ft extends EE_Fieldtype implements ColumnInterface
 {
     /**
+     * @var bool
+     */
+    public $has_array_data = false;
+
+    /**
      * @var string[]
      */
     public $info = array(
@@ -173,6 +178,12 @@ class Encryption_fieldtype_ft extends EE_Fieldtype implements ColumnInterface
         return $this->settings['hidden_text'];
     }
 
+    /**
+     * @param $data
+     * @param array $params
+     * @param false $tagdata
+     * @return mixed
+     */
     public function replace_raw($data, $params = [], $tagdata = false)
     {
         return $data;
