@@ -13,7 +13,7 @@ return [
     'description'       => 'Encrypts data for storage and decrypts for reads',
     'version'           => '1.0.0',
     'namespace'         => 'Mithra62\EncryptionFieldtype',
-    'settings_exist'    => true,
+    'settings_exist'    => false,
     'fieldtypes'        => [
         'encryption_fieldtype' => [
             'name' => 'Encryption FieldType',

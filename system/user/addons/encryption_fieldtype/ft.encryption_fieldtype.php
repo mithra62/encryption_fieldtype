@@ -26,14 +26,15 @@ class Encryption_fieldtype_ft extends EE_Fieldtype implements ColumnInterface
      * @var array
      */
     protected $field_types = array(
-        'password' => 'Password',
         'input' => 'Input',
-        'textarea' => 'Textarea'
+        'textarea' => 'Textarea',
+        'password' => 'Password'
     );
 
     public function __construct()
     {
         ee()->lang->loadfile('encryption_fieldtype');
+        ee()->load->helper('array');
         parent::__construct();
     }
 
@@ -45,7 +46,7 @@ class Encryption_fieldtype_ft extends EE_Fieldtype implements ColumnInterface
         return array(
             'decrypt_access' => '',
             'field_max_length' => '128',
-            'display_field_type' => 'password',
+            'display_field_type' => 'input',
             'hidden_text' => '******'
         );
     }
@@ -128,11 +129,11 @@ class Encryption_fieldtype_ft extends EE_Fieldtype implements ColumnInterface
             ]
         ];
 
-        return ['field_options_encryption' => [
+        return ['field_options_encryption_fieldtype' => [
             'label' => 'field_options',
-            'group' => 'encryption_ft',
+            'group' => 'encryption_fieldtype',
             'settings' => $settings
-        ]
+            ]
         ];
     }
 
