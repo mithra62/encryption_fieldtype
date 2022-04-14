@@ -12,7 +12,7 @@ class Field
     public function display($data, $settings, $ft_name)
     {
         $field = '';
-        $field_settings = $settings;
+        $field_settings = $settings['field_settings'];
         if($data != '')
         {
             if(ee()->session->userdata('role_id') != '1' &&
@@ -29,7 +29,10 @@ class Field
                 is_array($field_settings['decrypt_access']) &&
                 in_array(ee()->session->userdata('role_id'), $field_settings['decrypt_access']))) {
 
-            $options['value'] = ee('Encrypt')->decode(($data));
+            $options['value'] = '';
+            if($data) {
+                $options['value'] = ee('Encrypt')->decode(($data));
+            }
 
         } else {
 
