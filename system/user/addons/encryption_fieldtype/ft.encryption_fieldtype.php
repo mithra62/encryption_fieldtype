@@ -14,6 +14,11 @@ class Encryption_fieldtype_ft extends EE_Fieldtype implements ColumnInterface
     public $has_array_data = false;
 
     /**
+     * @var null
+     */
+    public $supportedEvaluationRules = null;
+
+    /**
      * @var string[]
      */
     public $info = array(
@@ -173,7 +178,11 @@ class Encryption_fieldtype_ft extends EE_Fieldtype implements ColumnInterface
                 is_array($this->settings['decrypt_access']) &&
                 in_array(ee()->session->userdata('role_id'), $this->settings['decrypt_access']))) {
 
-            return ee('Encrypt')->decode(htmlspecialchars_decode($data));
+            if($data) {
+                return ee('Encrypt')->decode(htmlspecialchars_decode($data));
+            }
+
+            return;
         }
 
         return $this->settings['hidden_text'];
@@ -219,5 +228,11 @@ class Encryption_fieldtype_ft extends EE_Fieldtype implements ColumnInterface
     public function update($version)
     {
         return true;
+    }
+
+
+    public function pre_loop($data)
+    {
+        return 'fdsa';
     }
 }
