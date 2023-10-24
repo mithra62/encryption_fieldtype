@@ -1,9 +1,5 @@
 <?php
 
-if (defined('PATH_THIRD')) {
-    require_once PATH_THIRD . 'encryption_fieldtype/vendor/autoload.php';
-}
-
 use Mithra62\EncryptionFieldtype\Services\Field;
 
 return [
