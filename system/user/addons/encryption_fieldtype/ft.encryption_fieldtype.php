@@ -23,7 +23,7 @@ class Encryption_fieldtype_ft extends EE_Fieldtype implements ColumnInterface
      */
     public $info = array(
         'name'      => 'Encryption FieldType',
-        'version'   => '1.0.0',
+        'version'   => ENCRYPTION_FIELDTYPE_VERSION,
     );
 
     /**
