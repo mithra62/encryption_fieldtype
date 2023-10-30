@@ -23,5 +23,4 @@ return [
             return new Field();
         },
     ]
-    // Advanced settings
 ];
