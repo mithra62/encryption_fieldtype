@@ -167,6 +167,15 @@ class Encryption_fieldtype_ft extends EE_Fieldtype implements ColumnInterface
 
     /**
      * @param $data
+     * @return string
+     */
+    public function grid_display_field($data)
+    {
+        return ee('encryption_fieldtype:Field')->gridDisplay($data, $this->settings, $this->field_name);
+    }
+
+    /**
+     * @param $data
      * @param array $params
      * @param false $tagdata
      * @return string
