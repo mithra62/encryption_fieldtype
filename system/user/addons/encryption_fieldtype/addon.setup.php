@@ -2,7 +2,7 @@
 
 use Mithra62\EncryptionFieldtype\Services\Field;
 
-const ENCRYPTION_FIELDTYPE_VERSION = '1.0.0';
+const ENCRYPTION_FIELDTYPE_VERSION = '1.1.1';
 
 return [
     'author'            => 'mithra62',
