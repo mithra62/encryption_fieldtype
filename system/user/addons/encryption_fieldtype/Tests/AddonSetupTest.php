@@ -96,4 +96,26 @@ class AddonSetupTest extends TestCase
         $this->assertEquals('text', $field_data['encryption_fieldtype']['compatibility']);
         return $addon;
     }
+
+    /**
+     * @depends testFieldCompatibility
+     * @param $addon
+     * @return Provider
+     */
+    public function testVersionConstDefined($addon)
+    {
+        $this->assertTrue(defined('ENCRYPTION_FIELDTYPE_VERSION'));
+        return $addon;
+    }
+
+    /**
+     * @depends testVersionConstDefined
+     * @param $addon
+     * @return Provider
+     */
+    public function testVersionValue($addon)
+    {
+        $this->assertTrue($addon->get('version') == ENCRYPTION_FIELDTYPE_VERSION);
+        return $addon;
+    }
 }
