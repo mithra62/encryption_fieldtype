@@ -1,2 +1,9 @@
 /system/user/addons/encryption_fieldtype/composer.phar
 /encryption_fieldtype.zip
+/system/user/addons/encryption_fieldtype/Tests/logs/junit.xml
+/system/user/addons/encryption_fieldtype/Tests/logs/logfile.txt
+/system/user/addons/encryption_fieldtype/Tests/logs/teamcity.txt
+/system/user/addons/encryption_fieldtype/Tests/logs/testdox.html
+/system/user/addons/encryption_fieldtype/Tests/logs/testdox.txt
+/system/user/addons/encryption_fieldtype/Tests/logs/testdox.xml
+/system/user/addons/encryption_fieldtype/Tests/.phpunit.result.cache
