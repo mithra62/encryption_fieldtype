@@ -92,32 +92,8 @@ class AddonSetupTest extends TestCase
     public function testFieldCompatibility($addon): Provider
     {
         $field_data = $addon->get('fieldtypes');
-        $this->assertTrue(!empty($field_data['datalist']['compatibility']));
-        $this->assertEquals('e', $field_data['datalist']['compatibility']);
-        return $addon;
-    }
-
-    /**
-     * @depends testFieldCompatibility
-     * @param $addon
-     * @return Provider
-     */
-    public function testSeederIndexExists($addon): Provider
-    {
-        $this->assertIsArray($addon->get('seeder'));
-        return $addon;
-    }
-
-    /**
-     * @depends testSeederIndexExists
-     * @param $addon
-     * @return Provider
-     */
-    public function testSeederField($addon): Provider
-    {
-        $seeder = $addon->get('seeder');
-        $this->assertTrue(!empty($seeder['fields']['datalist']));
-        $this->assertEquals('Mithra62\DataList\Fields\DataList\Seeder', $seeder['fields']['datalist']);
+        $this->assertTrue(!empty($field_data['encryption_fieldtype']['compatibility']));
+        $this->assertEquals('text', $field_data['encryption_fieldtype']['compatibility']);
         return $addon;
     }
 }
