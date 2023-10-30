@@ -13,7 +13,7 @@ return [
     'fieldtypes'        => [
         'encryption_fieldtype' => [
             'name' => 'Encryption FieldType',
-            'compatibility' => 'everything',
+            'compatibility' => 'text',
         ],
     ],
     'services' => [

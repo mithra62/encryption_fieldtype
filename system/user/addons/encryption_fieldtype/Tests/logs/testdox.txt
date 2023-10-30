@@ -1,0 +1,10 @@
+Addon Setup (Mithra62\EncryptionFieldType\Tests\AddonSetup)
+ [x] File exists
+ [x] Author value
+ [x] Name value
+ [x] Namespace value
+ [x] Settings value
+ [x] Fieldtypes index exists
+ [x] Field name is proper
+ [ ] Field compatibility
+
