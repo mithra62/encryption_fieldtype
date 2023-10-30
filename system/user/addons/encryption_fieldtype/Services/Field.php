@@ -4,12 +4,31 @@ namespace Mithra62\EncryptionFieldtype\Services;
 class Field
 {
     /**
-     * @param $data
-     * @param $settings
-     * @param $ft_name
+     * @param string $data
+     * @param array $settings
+     * @param string $ft_name
      * @return string
      */
-    public function display($data, $settings, $ft_name)
+    public function gridDisplay(?string $data, array $settings, string $ft_name): string
+    {
+        $field = '';
+        $field_settings = [
+            'decrypt_access' => $settings['decrypt_access'],
+            'hidden_text' => $settings['hidden_text'],
+            'display_field_type' => $settings['display_field_type'],
+        ];
+
+        $settings['field_settings'] = $field_settings;
+        return $this->display($data, $settings, $ft_name);
+    }
+
+    /**
+     * @param string|null $data
+     * @param array $settings
+     * @param string $ft_name
+     * @return string
+     */
+    public function display(?string $data, array $settings, string $ft_name): string
     {
         $field = '';
         $field_settings = $settings['field_settings'];

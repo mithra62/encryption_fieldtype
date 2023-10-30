@@ -23,7 +23,7 @@ class Encryption_fieldtype_ft extends EE_Fieldtype implements ColumnInterface
      */
     public $info = array(
         'name'      => 'Encryption FieldType',
-        'version'   => '1.0.0',
+        'version'   => ENCRYPTION_FIELDTYPE_VERSION,
     );
 
     /**
@@ -163,6 +163,15 @@ class Encryption_fieldtype_ft extends EE_Fieldtype implements ColumnInterface
     public function display_field($data)
     {
         return ee('encryption_fieldtype:Field')->display($data, $this->settings, $this->field_name);
+    }
+
+    /**
+     * @param $data
+     * @return string
+     */
+    public function grid_display_field($data)
+    {
+        return ee('encryption_fieldtype:Field')->gridDisplay($data, $this->settings, $this->field_name);
     }
 
     /**
