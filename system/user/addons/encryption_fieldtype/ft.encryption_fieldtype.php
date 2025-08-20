@@ -1,6 +1,6 @@
 <?php
 
-if (! defined('BASEPATH')) {
+if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 }
 
@@ -21,20 +21,20 @@ class Encryption_fieldtype_ft extends EE_Fieldtype implements ColumnInterface
     /**
      * @var string[]
      */
-    public $info = array(
-        'name'      => 'Encryption FieldType',
-        'version'   => ENCRYPTION_FIELDTYPE_VERSION,
-    );
+    public $info = [
+        'name' => 'Encryption FieldType',
+        'version' => ENCRYPTION_FIELDTYPE_VERSION,
+    ];
 
     /**
      * The available "types" of fields the FT will make available
      * @var array
      */
-    protected $field_types = array(
+    protected $field_types = [
         'input' => 'Input',
         'textarea' => 'Textarea',
-        'password' => 'Password'
-    );
+        'password' => 'Password',
+    ];
 
     public function __construct()
     {
@@ -48,12 +48,12 @@ class Encryption_fieldtype_ft extends EE_Fieldtype implements ColumnInterface
      */
     public function install()
     {
-        return array(
+        return [
             'decrypt_access' => '',
             'field_max_length' => '128',
             'display_field_type' => 'input',
-            'hidden_text' => '******'
-        );
+            'hidden_text' => '******',
+        ];
     }
 
     /**
@@ -83,7 +83,7 @@ class Encryption_fieldtype_ft extends EE_Fieldtype implements ColumnInterface
     public function display_settings($data): array
     {
         $selected = element('display_field_type', $data);
-        $field_max_length = !empty($data['field_max_length']) ? $data['field_max_length'] : 128 ;
+        $field_max_length = !empty($data['field_max_length']) ? $data['field_max_length'] : 128;
         $hidden_text = !empty($data['hidden_text']) ? $data['hidden_text'] : '******';
         $selected_group = (isset($data['decrypt_access']) && $data['decrypt_access'] != '') ? $data['decrypt_access'] : [];
         $settings = [
@@ -95,7 +95,7 @@ class Encryption_fieldtype_ft extends EE_Fieldtype implements ColumnInterface
                         'name' => 'display_field_type',
                         'type' => 'select',
                         'choices' => $this->field_types,
-                        'value' => $selected
+                        'value' => $selected,
                     ],
                 ],
             ],
@@ -117,7 +117,7 @@ class Encryption_fieldtype_ft extends EE_Fieldtype implements ColumnInterface
                         'name' => 'decrypt_access',
                         'type' => 'checkbox',
                         'value' => $selected_group,
-                        'choices' => ee('encryption_fieldtype:Field')->roleOptions()
+                        'choices' => ee('encryption_fieldtype:Field')->roleOptions(),
                     ],
                 ],
             ],
@@ -128,17 +128,17 @@ class Encryption_fieldtype_ft extends EE_Fieldtype implements ColumnInterface
                     'hidden_text' => [
                         'name' => 'hidden_text',
                         'type' => 'text',
-                        'value' => $hidden_text
+                        'value' => $hidden_text,
                     ],
                 ],
-            ]
+            ],
         ];
 
         return ['field_options_encryption_fieldtype' => [
             'label' => 'field_options',
             'group' => 'encryption_fieldtype',
-            'settings' => $settings
-            ]
+            'settings' => $settings,
+        ],
         ];
     }
 
@@ -149,10 +149,10 @@ class Encryption_fieldtype_ft extends EE_Fieldtype implements ColumnInterface
     public function save_settings($data)
     {
         return [
-            'decrypt_access'		=> element('decrypt_access', $data),
-            'field_max_length'		=> element('field_max_length', $data),
-            'display_field_type'	=> element('display_field_type', $data),
-            'hidden_text'			=> element('hidden_text', $data)
+            'decrypt_access' => element('decrypt_access', $data),
+            'field_max_length' => element('field_max_length', $data),
+            'display_field_type' => element('display_field_type', $data),
+            'hidden_text' => element('hidden_text', $data),
         ];
     }
 
@@ -182,12 +182,12 @@ class Encryption_fieldtype_ft extends EE_Fieldtype implements ColumnInterface
      */
     public function replace_tag($data, $params = [], $tagdata = false)
     {
-        if(ee()->session->userdata('role_id') == '1' ||
+        if (ee()->session->userdata('role_id') == '1' ||
             (isset($this->settings['decrypt_access']) &&
                 is_array($this->settings['decrypt_access']) &&
                 in_array(ee()->session->userdata('role_id'), $this->settings['decrypt_access']))) {
 
-            if($data) {
+            if ($data) {
                 return ee('Encrypt')->decode(htmlspecialchars_decode($data));
             }
 

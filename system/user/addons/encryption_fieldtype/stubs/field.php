@@ -1,0 +1,2 @@
+<span>{<?=$field_name?>} Depending on configuration, either the unencrypted value or the string used in settings (based on roles) </span> <br />
+<span>{<?=$field_name?>:raw} <- The value in storage </span>
