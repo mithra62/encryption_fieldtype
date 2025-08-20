@@ -6,7 +6,7 @@ const ENCRYPTION_FIELDTYPE_VERSION = '1.1.1';
 
 return [
     'author'            => 'mithra62',
-    'author_url'        => '',
+    'author_url'        => 'https://mithra62.com/',
     'name'              => 'Encryption FieldType',
     'description'       => 'Encrypts data for storage and decrypts for reads',
     'version'           => ENCRYPTION_FIELDTYPE_VERSION,
@@ -14,7 +14,7 @@ return [
     'settings_exist'    => false,
     'fieldtypes'        => [
         'encryption_fieldtype' => [
-            'name' => 'Encryption FieldType',
+            'name' => 'Encryption',
             'compatibility' => 'text',
         ],
     ],
