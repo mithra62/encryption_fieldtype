@@ -16,6 +16,9 @@ return [
         'encryption_fieldtype' => [
             'name' => 'Encryption',
             'compatibility' => 'text',
+            'use' => [
+                'MemberField',
+            ],
         ],
     ],
     'services' => [
